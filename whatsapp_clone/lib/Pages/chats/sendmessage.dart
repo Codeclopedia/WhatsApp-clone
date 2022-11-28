@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Constants/appnaming.dart';
 
 class SendMessage extends StatelessWidget {
-  const SendMessage({super.key});
+  final String message;
+  const SendMessage({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SendMessage extends StatelessWidget {
                         bottom: MediaQuery.of(context).size.height * 0.03,
                         right: MediaQuery.of(context).size.width * 0.05),
                     child: Text(
-                      'message,asdasdbadbioashdiohasdhpasdopasopdjasopjdopasopdasopdopasdopasbdphasopbdopasdophasopdhasiophdopashdophasopdh  sdasdbadbioashdiohasdhpasdopasopdjasopjdopasopdasopdopasdopasbdphasopbdopasdophasopdhasiophdopashdophasopdh   sdasdbadbioashdiohasdhpasdopasopdjasopjdopasopdasopdopasdopasbdphasopbdopasdophasopdhasiophdopashdophasopdh',
+                      message.toString(),
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: MediaQuery.of(context).size.width * 0.04),

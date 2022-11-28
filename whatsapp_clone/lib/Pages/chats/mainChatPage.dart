@@ -1,13 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:whatsapp_clone/Constants/appnaming.dart';
 
 import 'package:whatsapp_clone/Pages/chats/bottomWidgets.dart';
 import 'package:whatsapp_clone/Pages/chats/textmessagepage.dart';
 import 'package:whatsapp_clone/model/userdatamodel.dart';
+import 'package:whatsapp_clone/service/backend.dart';
 
 class MainChatPage extends StatelessWidget {
   final Userdata users;
+  ScrollController scrollController = ScrollController();
+  backendController backend = Get.find();
   MainChatPage({super.key, required this.users});
 
   @override
@@ -78,8 +82,8 @@ class MainChatPage extends StatelessWidget {
                 fit: BoxFit.cover)),
         child: Stack(
           children: [
-            TextMessagesPage(),
-            BottomWidgets(username: users.username),
+            TextMessagesPage(scrollcontrollers: scrollController),
+            BottomWidgets(username: backend.user!.phoneNumber.toString()),
           ],
         ),
       ),

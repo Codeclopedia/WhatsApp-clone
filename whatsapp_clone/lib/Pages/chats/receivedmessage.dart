@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Constants/appnaming.dart';
 
 class ReceivedMessage extends StatelessWidget {
-  const ReceivedMessage({super.key});
+  final String message;
+  const ReceivedMessage({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ReceivedMessage extends StatelessWidget {
                         bottom: MediaQuery.of(context).size.height * 0.03,
                         right: MediaQuery.of(context).size.width * 0.05),
                     child: Text(
-                      'message,',
+                      message,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: MediaQuery.of(context).size.width * 0.04),

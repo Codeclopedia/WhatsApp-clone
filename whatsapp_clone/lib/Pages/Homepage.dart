@@ -81,6 +81,8 @@ class _HomepageState extends State<Homepage>
       floating: true,
       pinned: true,
       snap: false,
+      leading: Container(),
+      leadingWidth: 0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -155,6 +157,8 @@ class _HomepageState extends State<Homepage>
     return SliverAppBar(
         backgroundColor: const Color.fromARGB(255, 177, 155, 238),
         toolbarHeight: MediaQuery.of(context).size.width * 0.4,
+        leading: Container(),
+        leadingWidth: 0,
         title: Container(
           child: Column(
             children: [

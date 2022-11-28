@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:whatsapp_clone/Pages/chats/receivedmessage.dart';
 import 'package:whatsapp_clone/Pages/chats/sendmessage.dart';
+import 'package:whatsapp_clone/service/backend.dart';
 
 class TextMessagesPage extends StatelessWidget {
-  TextMessagesPage({super.key});
+  ScrollController scrollcontrollers;
+  backendController backend = Get.find();
+  TextMessagesPage({super.key, required this.scrollcontrollers});
 
   @override
   Widget build(BuildContext context) {
@@ -13,27 +17,20 @@ class TextMessagesPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.01,
           ),
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-              ),
-              SendMessage(),
-              ReceivedMessage(),
-              SendMessage(),
-              ReceivedMessage(),
-              SendMessage(),
-              ReceivedMessage(),
-              SendMessage(),
-              ReceivedMessage(),
-              SendMessage(),
-              ReceivedMessage(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-              )
-            ],
-          ),
+          child: Obx(() => ListView.builder(
+                scrollDirection: Axis.vertical,
+                controller: scrollcontrollers,
+                shrinkWrap: true,
+                itemCount: backend.listofmessages.length,
+                itemBuilder: (context, index) {
+                  Widget widget = backend.listofmessages[index].sendmessage
+                      ? SendMessage(
+                          message: backend.listofmessages[index].message)
+                      : ReceivedMessage(
+                          message: backend.listofmessages[index].message);
+                  return widget;
+                },
+              )),
         ));
   }
 }

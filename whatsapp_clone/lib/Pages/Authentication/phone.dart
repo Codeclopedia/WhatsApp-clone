@@ -33,17 +33,17 @@ class _MyPhoneState extends State<MyPhone> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: inSignUpProcess
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Color.fromARGB(255, 175, 150, 245),
-              ),
-            )
-          : Container(
-              margin: const EdgeInsets.only(left: 25, right: 25),
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: Column(
+      body: Container(
+        margin: const EdgeInsets.only(left: 25, right: 25),
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: inSignUpProcess
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 175, 150, 245),
+                  ),
+                )
+              : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
@@ -171,8 +171,8 @@ class _MyPhoneState extends State<MyPhone> {
                     )
                   ],
                 ),
-              ),
-            ),
+        ),
+      ),
     );
   }
 }

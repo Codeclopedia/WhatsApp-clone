@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:whatsapp_clone/model/messagemodel.dart';
@@ -6,6 +7,7 @@ import 'package:whatsapp_clone/model/messagemodel.dart';
 class backendController extends GetxController {
   late IO.Socket socket;
   var user;
+  RxList<messagemodel> listofmessages = <messagemodel>[].obs;
 
   void currentUserdata() {
     user = FirebaseAuth.instance.currentUser;
@@ -21,8 +23,10 @@ class backendController extends GetxController {
       print("connected");
       socket.on(
           "/messageReceived",
-          (messagedata) => messagemodel(
-              sendmessage: false, message: messagedata["message"]));
+          (messagedata) => {
+                listofmessages
+                    .add(messagemodel(sendmessage: false, message: messagedata))
+              });
     });
     socket.emit("/test", "hello world");
   }
@@ -35,12 +39,12 @@ class backendController extends GetxController {
     socket.emit("/messageSent", {
       "message": message,
       "sourceId": sourceId,
-      "destinationId": destinationId
+      "destinationId": "+919910363084",
     });
-  }
-
-  void receivemessage(String message, String sourceId, String destinationId) {
-    socket.on("/messageReceived", (data) => print("messageReceived"));
+    listofmessages.add(messagemodel(
+      sendmessage: true,
+      message: message,
+    ));
   }
 
   @override

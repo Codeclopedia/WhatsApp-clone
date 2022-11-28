@@ -206,7 +206,7 @@ class _BottomWidgetsState extends State<BottomWidgets> {
         enableSkinTones: true,
         showRecentsTab: true,
         recentsLimit: 28,
-        noRecents: const Text(
+        noRecents: Text(
           'No Recents',
           style: TextStyle(fontSize: 20, color: Colors.black26),
           textAlign: TextAlign.center,
